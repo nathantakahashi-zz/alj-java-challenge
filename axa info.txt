@@ -1,0 +1,30 @@
+	Add tests
+	Change syntax
+	Protect controller end points
+	Add caching logic for database calls
+	Improve doc and comments
+	Fix any bug you might find
+	Edit readme.md and add any comments. It can be about what you did, what you would have done if you had more time, etc.
+
+	Restrictions
+	use java 8
+	What we will look for
+	Readability of your code
+	Documentation
+	Comments in your code
+	Appropriate usage of spring boot
+	Appropriate usage of packages
+	Is the application running as expected
+	No performance issues
+	
+What I did:
+Added boolean as return value for the operations saveEmployee, deleteEmployee and updateEmployee to check if the operation has been correctly performed
+Exceptions management on all the 5 operations
+Handling of null values for Spring JPA
+Added Spring Security
+Added Spring Cache for the caching logic of database calls
+Added Okta authentication and authorization with roles 
+username: axademo@demo.demo 
+password: axCoding1
+secretAnswer: axaDemo
+

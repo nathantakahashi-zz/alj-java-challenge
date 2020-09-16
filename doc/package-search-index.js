@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","url":"allpackages-index.html"},{"l":"jp.co.axa.apidemo"},{"l":"jp.co.axa.apidemo.controllers"},{"l":"jp.co.axa.apidemo.entities"},{"l":"jp.co.axa.apidemo.repositories"},{"l":"jp.co.axa.apidemo.security"},{"l":"jp.co.axa.apidemo.services"},{"l":"jp.co.axa.apidemo.utils"}]
