@@ -1,27 +1,35 @@
 package jp.co.axa.apidemo.services;
 
-import jp.co.axa.apidemo.entities.Employee;
-import jp.co.axa.apidemo.repositories.EmployeeRepository;
+import java.util.Collections;
+import java.util.List;
+import java.util.Optional;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import jp.co.axa.apidemo.entities.Employee;
+import jp.co.axa.apidemo.repositories.EmployeeRepository;
+import lombok.RequiredArgsConstructor;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class EmployeeServiceImpl.
  */
 @Service
+@RequiredArgsConstructor
 public class EmployeeServiceImpl implements EmployeeService{
+	
+	Logger logger = LoggerFactory.getLogger(EmployeeServiceImpl.class);
 
 	/** The employee repository. */
 	@Autowired
 	private EmployeeRepository employeeRepository;
+	
+	private String error = "ERROR: ";
 
 	/**
 	 * Sets the employee repository.
@@ -45,11 +53,11 @@ public class EmployeeServiceImpl implements EmployeeService{
 		try {
 			employees = employeeRepository.findAll();
 		} catch(Exception ex) {
-			System.out.println("ERROR:" + ex.getMessage());
-			return null;
+			logger.error(error, ex.getMessage());
+			return Collections.emptyList(); 
 		}
 
-		return new ArrayList<Employee>();
+		return employees;
 	}
 
 	/**
@@ -66,7 +74,7 @@ public class EmployeeServiceImpl implements EmployeeService{
 		try {
 			optEmp = employeeRepository.findById(employeeId);
 		} catch(Exception ex) {
-			System.out.println("ERROR:" + ex.getMessage());
+			logger.error(error, ex.getMessage());
 			return null;
 		}
 		if(optEmp.isEmpty()) return null;
@@ -86,7 +94,7 @@ public class EmployeeServiceImpl implements EmployeeService{
 		try {
 			employeeRepository.save(employee);
 		} catch(Exception ex) {
-			System.out.println("ERROR:" + ex.getMessage());
+			logger.error(error, ex.getMessage());
 			return false;
 		}
 		return true;
@@ -104,7 +112,7 @@ public class EmployeeServiceImpl implements EmployeeService{
 		try {
 			employeeRepository.deleteById(employeeId);
 		} catch(Exception ex) {
-			System.out.println("ERROR:" + ex.getMessage());
+			logger.error(error, ex.getMessage());
 			return false;
 		}
 		return true;
@@ -118,11 +126,11 @@ public class EmployeeServiceImpl implements EmployeeService{
 	 */
 	@CacheEvict(value = "employee", allEntries=true)
 	public boolean updateEmployee(Employee employee) {
-
+		
 		try {
 			employeeRepository.save(employee);
 		} catch(Exception ex) {
-			System.out.println("ERROR:" + ex.getMessage());
+			logger.error(error, "ERROR: "+ ex.getMessage());
 			return false;
 		}
 		return true;

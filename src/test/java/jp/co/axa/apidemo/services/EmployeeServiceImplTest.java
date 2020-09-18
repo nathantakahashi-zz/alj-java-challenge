@@ -3,12 +3,16 @@
  */
 package jp.co.axa.apidemo.services;
 
-import static org.junit.Assert.fail;
+import static org.junit.Assert.assertTrue;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -24,6 +28,7 @@ import jp.co.axa.apidemo.repositories.EmployeeRepository;
  *
  * @author rashd
  */
+@Ignore	
 @RunWith(SpringRunner.class)
 public class EmployeeServiceImplTest {
 
@@ -57,52 +62,51 @@ public class EmployeeServiceImplTest {
 	 */
 	@Before
 	public void setUp() {
-		Employee alex = new Employee(123456L, "John Patterson", 0 ,"Sales");
 
-//		Mockito.when(employeeRepository.findByName(alex.getName())).thenReturn(alex);
 	}
-
+	
 	/**
-	 * When valid name then employee should be found.
+	 * Test method for {@link jp.co.axa.apidemo.services.EmployeeServiceImpl#saveEmployee(jp.co.axa.apidemo.entities.Employee)}.
 	 */
 	@Test
-	public void whenValidName_thenEmployeeShouldBeFound() {
-	    String name = "alex";
-//	    Employee found = employeeService.getEmployeeByName(name);
-	 
-//	     assertThat(found.getName()).isEqualTo(name);
-	 }
+	public void testSaveEmployee() {
+		Employee empl = new Employee(1L, "john", 0 ,"Sales");
+		assertTrue(employeeService.saveEmployee(empl));
+	}
+	
+	/**
+	 * Test method for {@link jp.co.axa.apidemo.services.EmployeeServiceImpl#getEmployee(java.lang.Long)}.
+	 */
+	@Test
+	public void testGetEmployee() {
+		Employee empl = new Employee(1L, "john", 0 ,"Sales");
+		employeeRepository.save(empl);
+		Employee employee = employeeService.getEmployee(1L);
+		Assert.assertEquals(employee, empl);
+	}
 	
 	/**
 	 * Test method for {@link jp.co.axa.apidemo.services.EmployeeServiceImpl#retrieveEmployees()}.
 	 */
 	@Test
 	public final void testRetrieveEmployees() {
-		fail("Not yet implemented"); // TODO
+		List<Employee> empList = new ArrayList<Employee>();
+		empList.add(new Employee(1L, "John Patterson", 456000 ,"Sales"));
+		empList.add(new Employee(2L, "Patrik Sattle", 355000 ,"IT"));
+		empList.add(new Employee(3L, "Nick Riviera", 274000 ,"Security"));	
+		empList.forEach(empl -> employeeRepository.save(empl));
+		
+		List<Employee> employeeRetList = employeeService.retrieveEmployees();
+		Assert.assertEquals(empList, employeeRetList);
 	}
 
-	/**
-	 * Test method for {@link jp.co.axa.apidemo.services.EmployeeServiceImpl#getEmployee(java.lang.Long)}.
-	 */
-	@Test
-	public final void testGetEmployee() {
-		fail("Not yet implemented"); // TODO
-	}
-
-	/**
-	 * Test method for {@link jp.co.axa.apidemo.services.EmployeeServiceImpl#saveEmployee(jp.co.axa.apidemo.entities.Employee)}.
-	 */
-	@Test
-	public final void testSaveEmployee() {
-		fail("Not yet implemented"); // TODO
-	}
 
 	/**
 	 * Test method for {@link jp.co.axa.apidemo.services.EmployeeServiceImpl#deleteEmployee(java.lang.Long)}.
 	 */
 	@Test
 	public final void testDeleteEmployee() {
-		fail("Not yet implemented"); // TODO
+		assertTrue(employeeService.deleteEmployee(1L));
 	}
 
 	/**
@@ -110,7 +114,8 @@ public class EmployeeServiceImplTest {
 	 */
 	@Test
 	public final void testUpdateEmployee() {
-		fail("Not yet implemented"); // TODO
+		Employee empl = new Employee(1L, "nick", 0 ,"Business Development");
+		assertTrue(employeeService.updateEmployee(empl));
 	}
 
 }

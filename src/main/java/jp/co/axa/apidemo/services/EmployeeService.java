@@ -1,10 +1,9 @@
 package jp.co.axa.apidemo.services;
 
-import jp.co.axa.apidemo.entities.Employee;
-
 import java.util.List;
 
-// TODO: Auto-generated Javadoc
+import jp.co.axa.apidemo.entities.Employee;
+
 /**
  * The Interface EmployeeService.
  */

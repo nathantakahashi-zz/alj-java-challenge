@@ -1,10 +1,16 @@
 package jp.co.axa.apidemo.repositories;
 
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import org.junit.Assert;
+import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -12,7 +18,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.core.annotation.Order;
-import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import jp.co.axa.apidemo.entities.Employee;
@@ -21,7 +26,9 @@ import jp.co.axa.apidemo.entities.Employee;
 /**
  * The Class EmployeeRepositoryTest.
  */
+@Ignore
 @RunWith(SpringRunner.class)
+@DataJpaTest
 public class EmployeeRepositoryTest {
 
 	/** The entity manager. */
@@ -29,9 +36,24 @@ public class EmployeeRepositoryTest {
 	/** The employee repository. */
 	@Mock
 	public EmployeeRepository employeeRepository;
-	
-    @Autowired
-    public TestEntityManager entityManager;
+
+	/** The entity manager. */
+	@Autowired
+	public TestEntityManager entityManager;
+
+	/** The emp list. */
+	static List<Employee> empList;
+
+	/**
+	 * Before all test methods.
+	 */
+	@BeforeClass
+	public static void beforeAllTestMethods() {
+		empList = new ArrayList<Employee>();
+		empList.add(new Employee(1L, "John Patterson", 456000 ,"Sales"));
+		empList.add(new Employee(2L, "Patrik Sattle", 355000 ,"IT"));
+		empList.add(new Employee(3L, "Nick Riviera", 274000 ,"Security"));	
+	}
 
 	/**
 	 * Injected components are not null.
@@ -49,8 +71,12 @@ public class EmployeeRepositoryTest {
 	@Test
 	@Order(2)
 	public final void saveEmployee_OK() {
-		Employee employee = new Employee(123456L, "John Patterson", 0 ,"Sales");
-		assertNotNull(employeeRepository.save(employee));
+		try{
+			empList.forEach(empl -> employeeRepository.save(empl));
+		} catch(Exception ex) {
+			assertTrue(false); 
+		}
+		assertTrue(true);
 	}
 
 	/**
@@ -60,6 +86,7 @@ public class EmployeeRepositoryTest {
 	@Order(3)
 	public final void testFindAll() {
 		List<Employee> employees = employeeRepository.findAll();
+		Assert.assertEquals(employees, empList);
 	}
 
 	/**
@@ -68,15 +95,12 @@ public class EmployeeRepositoryTest {
 	@Test
 	@Order(4)
 	public final void testFindById() {
-		// given
-		Long employeeId = 123456L;
+		Long employeeId = 1L;
 
-		// when
-		Optional<Employee> found = employeeRepository.findById(employeeId);
-
-		// then
-		System.out.println();
-		//assertThat(found.get().).isEqualTo(alex.getName());
+		Optional<Employee> empl = employeeRepository.findById(employeeId);
+		assertFalse(empl.isEmpty());
+		assertTrue(empl.isPresent());
+		//assertEquals("expected", empl.get());
 	}
 
 	/**
@@ -85,8 +109,14 @@ public class EmployeeRepositoryTest {
 	@Test
 	@Order(5)
 	public final void deleteById() {
-		Long employeeId = 123456L;
-		employeeRepository.deleteById(employeeId);
+		try {
+			employeeRepository.deleteById(1L);
+			employeeRepository.deleteById(2L);
+			employeeRepository.deleteById(3L);
+		} catch(Exception ex) {
+			assertTrue(false); 
+		}
+		assertTrue(true);
 	}
 
 }
