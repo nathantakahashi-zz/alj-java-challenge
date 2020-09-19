@@ -1,3 +1,24 @@
+#### What I did:
+- Added boolean as return value for the operations saveEmployee, deleteEmployee and updateEmployee to check if the operation has been correctly performed
+- Exceptions management on all the 5 operations
+- Handling of null values for Spring JPA
+- Added Spring Security for url protection
+- Added Spring Cache for the caching logic of database calls
+- Create Dto of Entity bean and expose it in the Controller, 
+- Created ApiConfig
+- Created documentation for the API: [https://github.com/nathantakahashi/alj-java-challenge/doc/index.html]
+- ### Added Okta authentication and authorization with role: 
+    - #### username: axademo@demo.demo 
+    - #### password: axCoding1
+    - #### secretAnswer: axaDemo
+ 
+#### What I would have done
+- Finish Unit test cases
+- General bugfix
+
+
+-------------------------------------------------------------------
+
 ### How to use this spring-boot project
 
 - Install packages with `mvn package`
@@ -42,21 +63,3 @@ Application (with the embedded H2 database) is ready to be used ! You can access
 - Appropriate usage of packages
 - Is the application running as expected
 - No performance issues
-
-
-#### What I did:
-- Added boolean as return value for the operations saveEmployee, deleteEmployee and updateEmployee to check if the operation has been correctly performed
-- Exceptions management on all the 5 operations
-- Handling of null values for Spring JPA
-- Added Spring Security
-- Added Spring Cache for the caching logic of database calls
-
-- Added Okta authentication and authorization with roles 
-    - username: axademo@demo.demo 
-    - password: axCoding1
-    - secretAnswer: axaDemo
-
-
-#### What I would have done
-- Unit test cases
-- General bugfix

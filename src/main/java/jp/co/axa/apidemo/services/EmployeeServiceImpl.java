@@ -16,6 +16,7 @@ import jp.co.axa.apidemo.entities.Employee;
 import jp.co.axa.apidemo.repositories.EmployeeRepository;
 import lombok.RequiredArgsConstructor;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class EmployeeServiceImpl.
  */
@@ -23,12 +24,14 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class EmployeeServiceImpl implements EmployeeService{
 	
+	/** The logger. */
 	Logger logger = LoggerFactory.getLogger(EmployeeServiceImpl.class);
 
 	/** The employee repository. */
 	@Autowired
 	private EmployeeRepository employeeRepository;
 	
+	/** The error. */
 	private String error = "ERROR: ";
 
 	/**

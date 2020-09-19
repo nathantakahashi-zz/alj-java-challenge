@@ -121,7 +121,7 @@ public class EmployeeControllerTest {
 	}
 
 	/**
-	 * Test method for {@link jp.co.axa.apidemo.controllers.EmployeeController#saveEmployee(jp.co.axa.apidemo.entities.Employee)}.
+	 * Test method .
 	 *
 	 * @throws Exception the exception
 	 */
@@ -154,7 +154,7 @@ public class EmployeeControllerTest {
 	}
 
 	/**
-	 * Test method for {@link jp.co.axa.apidemo.controllers.EmployeeController#updateEmployee(jp.co.axa.apidemo.entities.Employee, java.lang.Long)}.
+	 * Test method .
 	 *
 	 * @throws Exception the exception
 	 */
@@ -176,7 +176,7 @@ public class EmployeeControllerTest {
 	 * @return the employee
 	 */
 	Employee createTestEmployee(String name){
-		return new Employee(123456L, name, 0 ,"Sales");
+		return null;
 	}
 	
 }

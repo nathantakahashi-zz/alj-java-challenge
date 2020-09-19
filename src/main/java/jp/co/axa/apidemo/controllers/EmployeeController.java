@@ -8,6 +8,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,19 +23,24 @@ import io.swagger.annotations.Api;
 import jp.co.axa.apidemo.dto.EmployeeDto;
 import jp.co.axa.apidemo.entities.Employee;
 import jp.co.axa.apidemo.services.EmployeeService;
+import lombok.AllArgsConstructor;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class EmployeeController.
  */
+@Validated
 @RestController
 @RequestMapping("/api/v1")
 @Api(value="axaApiDemo")
+@AllArgsConstructor
 public class EmployeeController {
 
 	/** The employee service. */
 	@Autowired
 	private EmployeeService employeeService;
 	
+    /** The model mapper. */
     @Autowired
     private ModelMapper modelMapper;
 
@@ -91,7 +97,7 @@ public class EmployeeController {
 	/**
 	 * Save employee.
 	 *
-	 * @param employee the employee
+	 * @param employeeDto the employee dto
 	 * @return the response entity
 	 */
 	@PostMapping("/employees/save")
@@ -108,7 +114,7 @@ public class EmployeeController {
 	/**
 	 * Update employee.
 	 *
-	 * @param employee the employee
+	 * @param employeeDto the employee dto
 	 * @param employeeId the employee id
 	 * @return the response entity
 	 */
@@ -140,7 +146,7 @@ public class EmployeeController {
 		} catch(Exception ex) {
 			return new ResponseEntity<>("Failed Employee Delete", HttpStatus.INTERNAL_SERVER_ERROR);
 		}
-		return new ResponseEntity<>("Failed Employee Deleted", HttpStatus.OK);
+		return new ResponseEntity<>("Employee Deleted Successfully", HttpStatus.OK);
 	}
 
 }

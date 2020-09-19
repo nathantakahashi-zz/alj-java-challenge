@@ -50,9 +50,6 @@ public class EmployeeRepositoryTest {
 	@BeforeClass
 	public static void beforeAllTestMethods() {
 		empList = new ArrayList<Employee>();
-		empList.add(new Employee(1L, "John Patterson", 456000 ,"Sales"));
-		empList.add(new Employee(2L, "Patrik Sattle", 355000 ,"IT"));
-		empList.add(new Employee(3L, "Nick Riviera", 274000 ,"Security"));	
 	}
 
 	/**
@@ -100,7 +97,7 @@ public class EmployeeRepositoryTest {
 		Optional<Employee> empl = employeeRepository.findById(employeeId);
 		assertFalse(empl.isEmpty());
 		assertTrue(empl.isPresent());
-		//assertEquals("expected", empl.get());
+		
 	}
 
 	/**

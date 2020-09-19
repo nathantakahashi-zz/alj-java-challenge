@@ -7,30 +7,34 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
-
-import lombok.Builder;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.Value;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class Employee.
  */
-@Value
-@Builder
+//@Value
+
 @Entity
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name="EMPLOYEE")
 public class Employee implements Serializable {
 
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = -8869817068674469541L;
 
 	/** The id. */
 	@Getter
-	@Setter
-	@Id
-	private Long id;
+    @Setter
+    @Id
+	@Column(name="ID")
+    private Long id;
 
 	/** The name. */
 	@Getter
@@ -49,28 +53,5 @@ public class Employee implements Serializable {
 	@Setter
 	@Column(name="DEPARTMENT")
 	private String department;
-
-	/**
-	 * Instantiates a new employee.
-	 *
-	 * @param id the id
-	 * @param name the name
-	 * @param salary the salary
-	 * @param department the department
-	 */
-	@JsonCreator
-	public Employee(@JsonProperty("id") Long id,
-			@JsonProperty("name") String name,
-			@JsonProperty("salary") Integer salary,
-			@JsonProperty("department") String department) {
-		this.id = id;
-		this.name = name;
-		this.salary = salary;
-		this.department = department;
-	}
-
-	public Employee(){
-		super();
-	}
 
 }

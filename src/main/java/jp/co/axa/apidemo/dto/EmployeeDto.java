@@ -3,6 +3,10 @@ package jp.co.axa.apidemo.dto;
 import lombok.Getter;
 import lombok.Setter;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class EmployeeDto.
+ */
 public class EmployeeDto {
 
 	/** The id. */
